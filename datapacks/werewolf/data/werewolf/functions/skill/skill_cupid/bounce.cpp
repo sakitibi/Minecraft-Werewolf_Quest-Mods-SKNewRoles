@@ -1,28 +1,40 @@
 #include <iostream>
 #include <string>
 
-void executeCommand(const std::string& command) {
-    std::cout << command << std::endl;
+void storeMotion(const std::string& axis, double motionValue) {
+    std::cout << "Storing motion for axis: " << axis << " with value: " << motionValue << std::endl;
+}
+
+void displayHeartParticles() {
+    std::cout << "Displaying heart particles" << std::endl;
+}
+
+void killEntity(const std::string& tag) {
+    std::cout << "Killing entity with tag: " << tag << std::endl;
+}
+
+void modifyEntityMotion() {
+    std::cout << "Modifying entity motion" << std::endl;
 }
 
 void processBounce() {
     // Motion X
-    executeCommand("execute as @s[tag=motion_x] store result storage item: motion double 0.001 run data get entity @s Motion[0] 1000");
-    executeCommand("execute as @s[tag=motion_x] at @s if data storage item: {motion:0d} run particle heart ~ ~ ~ 0.2 0.2 0.2 0 3 force @a[team=Cupid]");
-    executeCommand("execute as @s[tag=motion_x] if data storage item: {motion:0d} run kill @s");
+    storeMotion("x", 0.001);
+    displayHeartParticles();
+    killEntity("motion_x");
 
     // Motion Y
-    executeCommand("execute as @s[tag=motion_y] store result storage item: motion double 0.001 run data get entity @s Motion[1] 1000");
-    executeCommand("execute as @s[tag=motion_y] at @s if data storage item: {motion:0d} run particle heart ~ ~ ~ 0.2 0.2 0.2 0 3 force @a[team=Cupid]");
-    executeCommand("execute as @s[tag=motion_y] if data storage item: {motion:0d} run kill @s");
+    storeMotion("y", 0.001);
+    displayHeartParticles();
+    killEntity("motion_y");
 
     // Motion Z
-    executeCommand("execute as @s[tag=motion_z] store result storage item: motion double 0.001 run data get entity @s Motion[2] 1000");
-    executeCommand("execute as @s[tag=motion_z] at @s if data storage item: {motion:0d} run particle heart ~ ~ ~ 0.2 0.2 0.2 0 3 force @a[team=Cupid]");
-    executeCommand("execute as @s[tag=motion_z] if data storage item: {motion:0d} run kill @s");
+    storeMotion("z", 0.001);
+    displayHeartParticles();
+    killEntity("motion_z");
 
-    // Modify entity motion data
-    executeCommand("data modify entity @s Item.tag.Motion set from entity @s Motion");
+    // Modify entity motion
+    modifyEntityMotion();
 }
 
 int main() {
