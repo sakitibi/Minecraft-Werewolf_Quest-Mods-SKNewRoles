@@ -1,30 +1,36 @@
 #include <iostream>
-#include <string>
+#include <vector>
 
-void setCooltime(int skill_cupid_cooltime, int cooltime_cupid_arrow[]) {
-    std::string hotbar_item = "hotbar.8 werewolf:item/skill/cupid/cooltime/";
+void setupCooltime(std::vector<int>& cooltime_cupid_arrow) {
+    int reserve_1 = 600;
+    int reserve_2 = reserve_1;
+    int reserve_3 = 10;
+    reserve_2 /= reserve_3;
 
-    if (skill_cupid_cooltime < cooltime_cupid_arrow[10] && skill_cupid_cooltime >= cooltime_cupid_arrow[9]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_0" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[9] && skill_cupid_cooltime >= cooltime_cupid_arrow[8]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_1" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[8] && skill_cupid_cooltime >= cooltime_cupid_arrow[7]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_2" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[7] && skill_cupid_cooltime >= cooltime_cupid_arrow[6]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_3" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[6] && skill_cupid_cooltime >= cooltime_cupid_arrow[5]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_4" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[5] && skill_cupid_cooltime >= cooltime_cupid_arrow[4]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_5" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[4] && skill_cupid_cooltime >= cooltime_cupid_arrow[3]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_6" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[3] && skill_cupid_cooltime >= cooltime_cupid_arrow[2]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_7" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[2] && skill_cupid_cooltime >= cooltime_cupid_arrow[1]) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_8" << std::endl;
-    } else if (skill_cupid_cooltime < cooltime_cupid_arrow[1] && skill_cupid_cooltime >= 1) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_9" << std::endl;
-    } else if (skill_cupid_cooltime == 0) {
-        std::cout << "item modify entity @s " << hotbar_item << "set_damage_10" << std::endl;
+    // クールタイム更新間隔を記録
+    for (int i = 0; i < 10; ++i) {
+        cooltime_cupid_arrow[i] = reserve_2;
     }
+
+    // 各クールタイム更新間隔を設定
+    for (int i = 1; i <= 10; ++i) {
+        cooltime_cupid_arrow[i - 1] *= i;
+    }
+
+    // 念のため使用したスコアボードを初期化
+    reserve_1 = 0;
+    reserve_2 = 0;
+    reserve_3 = 0;
+}
+
+int main() {
+    std::vector<int> cooltime_cupid_arrow(10);
+    setupCooltime(cooltime_cupid_arrow);
+
+    // Print the cooltime_cupid_arrow values for verification
+    for (int i = 0; i < 10; ++i) {
+        std::cout << "cooltime_cupid_arrow_" << (i + 1) << ": " << cooltime_cupid_arrow[i] << std::endl;
+    }
+
+    return 0;
 }
