@@ -60,12 +60,12 @@ int main() {
     // クールタイム設定
     // ビーム
     removeScore("@a", "skill_jinrou_roar_cooltime", 1);
-    replaceSkillItem("Witch", "werewolf:skill/jinrou_roar_skill/cooltime");
+    replaceSkillItem("Witch", "werewolf:skill/witch_roar_skill/cooltime");
 
     if (time_phase == "day") {
-        replaceSkillItem("Witch", "werewolf:skill/jinrou_roar_skill/ban");
+        replaceSkillItem("Witch", "werewolf:skill/witch_roar_skill/ban");
     } else if (time_phase == "night") {
-        replaceSkillItem("Witch", "werewolf:skill/jinrou_roar_skill/");
+        replaceSkillItem("Witch", "werewolf:skill/witch_roar_skill/");
     }
 
     // キル
