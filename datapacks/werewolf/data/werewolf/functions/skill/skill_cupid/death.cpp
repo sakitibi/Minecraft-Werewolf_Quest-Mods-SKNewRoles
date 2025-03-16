@@ -1,18 +1,34 @@
 #include <iostream>
 #include <string>
 
-void executeCommand(const std::string& command) {
-    std::cout << command << std::endl;
+void tellLoversDeathMessage() {
+    std::cout << "Telling lovers death message" << std::endl;
+}
+
+void tellCupidDeathMessage() {
+    std::cout << "Telling Cupid death message" << std::endl;
+}
+
+void killLovers() {
+    std::cout << "Killing lovers" << std::endl;
+}
+
+void killCupid() {
+    std::cout << "Killing Cupid" << std::endl;
 }
 
 void processDeath() {
-    // メッセージを表示
-    executeCommand(R"(tellraw @a[tag=player,tag=lovers] [{"text":"亡き思い人の後を追い、あなたは永遠の愛へと旅立った…","color":"light_purple"}])");
-    executeCommand(R"(tellraw @a[team=Cupid] [{"text":"亡き思い人達の後を追い、あなたは永遠の愛へと旅立った…","color":"light_purple"}])");
+    // 亡き思い人の後を追い、あなたは永遠の愛へと旅立った…
+    tellLoversDeathMessage();
 
-    // プレイヤーをキル
-    executeCommand("kill @a[tag=player,tag=lovers]");
-    executeCommand("kill @a[team=Cupid]");
+    // 亡き思い人達の後を追い、あなたは永遠の愛へと旅立った…
+    tellCupidDeathMessage();
+
+    // Kill lovers
+    killLovers();
+
+    // Kill Cupid
+    killCupid();
 }
 
 int main() {
