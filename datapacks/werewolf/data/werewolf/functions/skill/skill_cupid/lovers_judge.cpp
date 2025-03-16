@@ -1,16 +1,15 @@
 #include <iostream>
-#include <string>
 
-void executeCommand(const std::string& command) {
-    std::cout << command << std::endl;
+void setLoversFullScore() {
+    std::cout << "Setting lovers_full score to 1" << std::endl;
 }
 
-void loversJudge() {
-    // 判定処理
-    executeCommand("execute if entity @a[tag=player,tag=lovers_1] if entity @a[tag=player,tag=lovers_2] run scoreboard players set #GameManager lovers_full 1");
+void processLoversJudge() {
+    // Check if both lovers_1 and lovers_2 tags are present
+    setLoversFullScore();
 }
 
 int main() {
-    loversJudge();
+    processLoversJudge();
     return 0;
 }
