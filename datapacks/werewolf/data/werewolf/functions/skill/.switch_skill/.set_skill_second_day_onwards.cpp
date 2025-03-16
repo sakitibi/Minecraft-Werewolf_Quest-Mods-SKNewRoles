@@ -59,7 +59,7 @@ int main() {
 
     // クールタイム設定
     // ビーム
-    removeScore("@a", "skill_jinrou_roar_cooltime", 1);
+    removeScore("@a", "skill_witch_roar_cooltime", 1);
     replaceSkillItem("Witch", "werewolf:skill/witch_roar_skill/cooltime");
 
     if (time_phase == "day") {
@@ -69,8 +69,8 @@ int main() {
     }
 
     // キル
-    replaceSkillItem("Witch", 0, "werewolf:skill/asasine_skill/");
-    replaceSkillItem("Witch", 1, "werewolf:skill/asasine_skill/cooltime");
+    replaceSkillItem("Witch", 0, "werewolf:skill/witch_slash_skill/");
+    replaceSkillItem("Witch", 1, "werewolf:skill/witch_slash_skill/cooltime");
 
     // 罠師
     replaceSkillItem("Wanashi", "werewolf:skill/wanashi_skill/");
