@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cooltime/setup.hpp>
+#include <cooltime/set_cooltime.hpp>
 
 void addChargeCupidArrowScore() {
     std::cout << "Adding charge_cupid_arrow score" << std::endl;
