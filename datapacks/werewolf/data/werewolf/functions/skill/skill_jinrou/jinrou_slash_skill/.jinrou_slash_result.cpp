@@ -63,12 +63,6 @@ int main() {
             replaceItem(entity, "weapon.mainhand", "werewolf:skill/asasine_skill/cooltime");
         }
 
-        // Handle witch specific actions
-        if (isWitch) {
-            executeFunction("werewolf:skill/skill_jinrou/jinrou_slash_skill/particular/invisibility");
-            replaceItem(entity, "weapon.mainhand", "werewolf:skill/asasine_skill/cooltime");
-        }
-
         // Update scores
         removeScore(entity, "skill_jinrou_slash_limit", 1);
         operationScore(entity, "skill_jinrou_slash_frequency", "=", "#GameManager", "skill_jinrou_slash_frequency");
