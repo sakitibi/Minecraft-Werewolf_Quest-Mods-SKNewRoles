@@ -1,17 +1,22 @@
-#include <iostream>
-#include <string>
+using System;
 
-void announceSlash(int playerTag) {
-    std::cout << "Announcing slash for player with tag: " << playerTag << std::endl;
-}
-
-void processDoubleKillerMainSlashAnnounce() {
-    for (int i = 1; i <= 12; ++i) {
-        announceSlash(i);
+class DoublekillerMainslashAnnounce
+{
+    static void AnnounceMainslash(int playerTag)
+    {
+        Console.WriteLine($"Announcing mainslash for player with tag: {playerTag}");
     }
-}
 
-int main() {
-    processDoubleKillerMainSlashAnnounce();
-    return 0;
+    static void ProcessDoublekillerMainslashAnnounce()
+    {
+        for (int i = 1; i <= 12; ++i)
+        {
+            AnnounceMainslash(i);
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        ProcessDoublekillerMainslashAnnounce();
+    }
 }
