@@ -35,7 +35,6 @@ int main() {
     std::unordered_map<std::string, int> scores = {{"skill_jinrou_slash_cooltime", 1}}; // Example value
     std::string team = "Jinrou"; // Example value
     bool isAsasine = false; // Example value
-    bool isWitch = false; // Example value
 
     // Check if skill is on cooldown
     if (scores["skill_jinrou_slash_cooltime"] != 0) {
