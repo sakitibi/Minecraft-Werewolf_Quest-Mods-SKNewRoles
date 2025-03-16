@@ -45,7 +45,7 @@ int main() {
 
     // スキル発動
     if (scores["charge_roar"] == 20) {
-        executeFunction("werewolf:skill/skill_jinrou/jinrou_roar_skill/main");
+        #include <main.cpp>
     }
 
     // チャージ用のスコアボードをリセット
