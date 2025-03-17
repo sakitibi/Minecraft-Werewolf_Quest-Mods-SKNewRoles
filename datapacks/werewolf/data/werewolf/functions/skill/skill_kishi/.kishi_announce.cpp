@@ -1,27 +1,40 @@
 #include <iostream>
-#include <fstream>
+#include <string>
+#include <vector>
+
+class Player {
+public:
+    int tag;
+    bool lookingAtPlayer;
+
+    Player(int tag, bool lookingAtPlayer) : tag(tag), lookingAtPlayer(lookingAtPlayer) {}
+
+    void titleActionbar(const std::string& message) {
+        std::cout << "Actionbar: " << message << std::endl;
+    }
+};
+
+// Mimic the predicate functions
+bool look_at_players(const Player& player) {
+    return player.lookingAtPlayer;
+}
+
+bool look_at_player_n(const Player& player, int n) {
+    return player.tag == n;
+}
 
 int main() {
-    std::ofstream outputFile("kishi_announce.txt"); // Output to a file
+    std::vector<Player> players;
+    for (int i = 1; i <= 12; ++i) {
+        players.emplace_back(i, true); // Assume all players are being looked at
+    }
 
-    if (outputFile.is_open()) {
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_1] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=1]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=1]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=1]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_2] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=2]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=2]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=2]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_3] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=3]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=3]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=3]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_4] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=4]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=4]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=4]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_5] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=5]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=5]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=5]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_6] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=6]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=6]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=6]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_7] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=7]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=7]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=7]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_8] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=8]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=8]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=8]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_9] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=9]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=9]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=9]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_10] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=10]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=10]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=10]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_11] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=11]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=11]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=11]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-        outputFile << "execute as @s[predicate=werewolf:look_at/look_at_player/look_at_players,predicate=werewolf:look_at/look_at_player/look_at_player_12] run title @s actionbar [{\"text\":\"\",\"font\":\"default\"},{\"selector\":\"@a[tag=12]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"},{\"selector\":\"@a[tag=12]\"},{\"text\":\"を護る (右クリック)\"},{\"selector\":\"@a[tag=12]\",\"font\":\"default_negative\"},{\"text\":\"\\uF80A\\uF806\",\"font\":\"default_negative\"}]" << std::endl;
-
-        outputFile.close();
-    } else {
-        std::cerr << "Unable to open file for writing." << std::endl;
-        return 1; // Indicate an error
+    for (const auto& player : players) {
+        if (look_at_players(player)) {
+            std::string message = "を護る (右クリック)";
+            std::cout << "Player " << player.tag << " is looking at a player." << std::endl;
+            player.titleActionbar("Player " + std::to_string(player.tag) + message);
+        }
     }
 
     return 0;
