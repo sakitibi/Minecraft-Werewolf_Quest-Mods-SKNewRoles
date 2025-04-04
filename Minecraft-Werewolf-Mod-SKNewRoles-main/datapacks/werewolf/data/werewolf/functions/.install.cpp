@@ -1,138 +1,198 @@
 #include <iostream>
-#include <fstream>
+#include <unordered_map>
+#include <string>
 
-void executeCommand(const std::string& command) {
-    std::ofstream mcFunction("output.mcfunction", std::ios::app);
-    if (mcFunction.is_open()) {
-        mcFunction << command << std::endl;
-        mcFunction.close();
+class Scoreboard {
+public:
+    void addObjective(const std::string& name) {
+        if (objectives.count(name) == 0) {
+            objectives[name] = 0;
+            std::cout << "Objective created: " << name << "\n";
+        }
     }
-}
 
-void initializeGameSettings() {
-    // バージョンを記録
-    executeCommand("function werewolf:version");
+    void setScore(const std::string& player, const std::string& objective, int value) {
+        std::string key = player + ":" + objective;
+        scores[key] = value;
+        std::cout << "Score set: " << key << " = " << value << "\n";
+    }
 
-    // ゲームフェイズ判定変数作成
-    executeCommand("execute unless data storage sys: game_phase run data modify storage sys: game_phase set value 0");
+    void operate(const std::string& target, const std::string& op, const std::string& source) {
+        int a = scores[target];
+        int b = scores[source];
+        if (op == "=") scores[target] = b;
+        else if (op == "/=") scores[target] = (b != 0) ? a / b : 0;
+        std::cout << "Operate: " << target << " " << op << " " << source << " → " << scores[target] << "\n";
+    }
 
-    // ゲームスタート判定変数作成
-    executeCommand("execute unless data storage sys: game_start run data modify storage sys: game_start set value 0");
+private:
+    std::unordered_map<std::string, int> objectives;
+    std::unordered_map<std::string, int> scores;
+};
 
-    // スコアボードの設定
-    executeCommand("scoreboard objectives add member_count dummy");
-    executeCommand("scoreboard objectives add death deathCount");
+class GameState {
+public:
+    void initGame() {
+        std::cout << "ゲーム初期化開始...\n";
 
-    // ゲームルール設定
-    executeCommand("gamerule announceAdvancements false");
-    executeCommand("gamerule showDeathMessages false");
-    executeCommand("gamerule sendCommandFeedback false");
-    executeCommand("gamerule doDaylightCycle false");
-    executeCommand("gamerule doWeatherCycle false");
-    executeCommand("gamerule randomTickSpeed 1");
-    executeCommand("gamerule doImmediateRespawn false");
-    executeCommand("gamerule doMobSpawning false");
+        // バージョン確認
+        std::cout << "バージョン確認: function werewolf:version\n";
 
-    // 難易度設定
-    executeCommand("difficulty hard");
+        // ゲーム状態
+        if (!dataStorage.count("game_phase"))
+            dataStorage["game_phase"] = 0;
+        if (!dataStorage.count("game_start"))
+            dataStorage["game_start"] = 0;
 
-    // 初期時間設定
-    executeCommand("execute if data storage sys: {game_phase:0} run time set 3000");
-}
+        // スコアボード
+        scoreboard.addObjective("member_count");
+        scoreboard.addObjective("death");
 
-void setupBossBar() {
-    executeCommand("data modify storage sys: bossbar_text set value '[{\"text\":\"\\uF804\\uF804\\uF804\\uF804\\uF804\\uF804\"},"
-                   "{\"score\":{\"name\":\"GameManager\",\"objective\":\"day\"},\"font\":\"default_negative\"},"
-                   "{\"interpret\":true,\"nbt\":\"time_text\",\"storage\":\"sys:\"},{\"text\":\" [\"},"
-                   "{\"score\":{\"name\":\"GameManager\",\"objective\":\"day\"}},{\"text\":\"日目]\"},"
-                   "{\"score\":{\"name\":\"GameManager\",\"objective\":\"day\"},\"font\":\"default_negative\"},"
-                   "{\"text\":\"\\uF804\\uF804\\uF804\\uF804\\uF804\\uF804\"},{\"interpret\":true,\"nbt\":\"random_event.title\",\"storage\":\"sys:\"},"
-                   "{\"interpret\":true,\"nbt\":\"random_event.content.1\",\"storage\":\"sys:\"},"
-                   "{\"interpret\":true,\"nbt\":\"random_event.content.2\",\"storage\":\"sys:\"},"
-                   "{\"interpret\":true,\"nbt\":\"random_event.content.3\",\"storage\":\"sys:\"},"
-                   "{\"interpret\":true,\"nbt\":\"random_event.bar\",\"storage\":\"sys:\"}]'");
-}
+        // ゲームルール
+        std::cout << "ゲームルール設定\n";
 
-void setupTimeCycle() {
-    executeCommand("scoreboard objectives add day dummy");
-    executeCommand("scoreboard objectives add common_timer dummy");
+        // 時間初期化
+        if (dataStorage["game_phase"] == 0)
+            time = 3000;
 
-    executeCommand("scoreboard objectives add set_first_daytime dummy");
-    executeCommand("execute unless score GameManager set_first_daytime matches 0.. run scoreboard players set GameManager set_first_daytime 1200");
-    executeCommand("scoreboard objectives add set_first_daytime_minutes dummy");
-    executeCommand("scoreboard players operation GameManager set_first_daytime_minutes = GameManager set_first_daytime");
-    executeCommand("scoreboard players operation GameManager set_first_daytime_minutes /= GameManager tick_minute");
+        // インベントリメニュー関連
+        scoreboard.addObjective("inventory_menu");
+        scoreboard.addObjective("time_since_death");
+        scoreboard.addObjective("ready");
+        std::cout << "scoreboard objectives setdisplay list ready\n";
 
-    executeCommand("scoreboard objectives add set_daytime dummy");
-    executeCommand("execute unless score GameManager set_daytime matches 0.. run scoreboard players set GameManager set_daytime 3600");
-    executeCommand("scoreboard objectives add set_daytime_minutes dummy");
-    executeCommand("scoreboard players operation GameManager set_daytime_minutes = GameManager set_daytime");
-    executeCommand("scoreboard players operation GameManager set_daytime_minutes /= GameManager tick_minute");
+        // 時間管理
+        scoreboard.addObjective("tick_second");
+        scoreboard.setScore("GameManager", "tick_second", 20);
+        scoreboard.addObjective("tick_minute");
+        scoreboard.setScore("GameManager", "tick_minute", 1200);
 
-    executeCommand("scoreboard objectives add set_nighttime dummy");
-    executeCommand("execute unless score GameManager set_nighttime matches 0.. run scoreboard players set GameManager set_nighttime 1200");
-    executeCommand("scoreboard objectives add set_nighttime_minutes dummy");
-    executeCommand("scoreboard players operation GameManager set_nighttime_minutes = GameManager set_nighttime");
-    executeCommand("scoreboard players operation GameManager set_nighttime_minutes /= GameManager tick_minute");
-}
+        // ボスバーの初期表示テキスト（模倣）
+        std::cout << "ボスバー表示内容を構築\n";
 
-void setupMiscellaneous() {
-    executeCommand("scoreboard objectives add rng dummy");
-    executeCommand("scoreboard objectives add .100 dummy");
-    executeCommand("scoreboard players set GameManager .100 100");
+        // 昼夜サイクル
+        initDayNightCycle();
+    }
 
-    executeCommand("scoreboard objectives add event_timer dummy");
-    executeCommand("scoreboard objectives add event_timer_countdown dummy");
-    executeCommand("execute unless data storage sys: event_active run data modify storage sys: event_active set value 0");
-    executeCommand("function werewolf:random_event/event_data");
+    void initRandomEventsAndSystem() {
+        scoreboard.addObjective("rng");
+        scoreboard.addObjective(".100");
+        scoreboard.setScore("GameManager", ".100", 100);
 
-    executeCommand("scoreboard objectives add event_timer_divide dummy");
-    executeCommand("scoreboard objectives add event_timer_update dummy");
-    executeCommand("scoreboard objectives add .36 dummy");
-    executeCommand("scoreboard players set GameManager .36 36");
+        scoreboard.addObjective("event_timer");
+        scoreboard.addObjective("event_timer_countdown");
+        if (!dataStorage.count("event_active"))
+            dataStorage["event_active"] = 0;
+        
+        scoreboard.addObjective("event_timer_divide");
+        scoreboard.addObjective("event_timer_update");
+        scoreboard.addObjective(".36");
+        scoreboard.setScore("GameManager", ".36", 36);
 
-    executeCommand("scoreboard objectives add meeting_button dummy");
-    executeCommand("execute unless data storage sys: meeting.active run data modify storage sys: meeting.active set value 1");
+        scoreboard.addObjective("meeting_button");
+        if (!dataStorage.count("meeting.active"))
+            dataStorage["meeting.active"] = 1;
 
-    executeCommand("execute unless data storage sys: judge_mode run data modify storage sys: judge_mode set value 0");
-    executeCommand("execute unless data storage sys: task_win.active run data modify storage sys: task_win.active set value 1");
-    executeCommand("execute unless data storage sys: task_win.count run data modify storage sys: task_win.count set value 100");
+        if (!dataStorage.count("judge_mode"))
+            dataStorage["judge_mode"] = 0;
+        if (!dataStorage.count("task_win.active"))
+            dataStorage["task_win.active"] = 1;
+        if (!dataStorage.count("task_win.count"))
+            dataStorage["task_win.count"] = 100;
 
-    executeCommand("scoreboard objectives add right_click minecraft.used:minecraft.carrot_on_a_stick");
-    executeCommand("scoreboard objectives add is_sneaking minecraft.custom:minecraft.sneak_time");
-    executeCommand("scoreboard objectives add login minecraft.custom:minecraft.leave_game");
+        scoreboard.addObjective("right_click");
+        scoreboard.addObjective("is_sneaking");
+        scoreboard.addObjective("login");
 
-    executeCommand("execute as @e[tag=child] run data modify entity @s Age set value 3000000");
+        entityTags["child_age_value"] = 3000000;
+    }
 
-    executeCommand("function werewolf:role/.ini");
-    executeCommand("function werewolf:skill/.ini");
-    executeCommand("function werewolf:item/.ini");
-    executeCommand("function werewolf:task/.ini");
-    executeCommand("function werewolf:shop/.ini");
-    executeCommand("function werewolf:anim/.ini");
-    executeCommand("function werewolf:.system/vote/.ini");
+    void initFinalSettings() {
+        std::cout << ".ini モジュール初期化...\n";
+        initRoleSystem();
+        initSkillSystem();
+        initItemSystem();
+        initTaskSystem();
+        initShopSystem();
+        initAnimSystem();
+        initVotingSystem();
 
-    executeCommand("scoreboard objectives add reserve_1 dummy");
-    executeCommand("scoreboard objectives add reserve_2 dummy");
-    executeCommand("scoreboard objectives add reserve_3 dummy");
-    executeCommand("scoreboard objectives add reserve_4 dummy");
-    executeCommand("scoreboard objectives add reserve_5 dummy");
-    executeCommand("scoreboard objectives add owner dummy");
+        for (int i = 1; i <= 5; ++i)
+            scoreboard.addObjective("reserve_" + std::to_string(i));
+        scoreboard.addObjective("owner");
 
-    executeCommand("bossbar add settings_bossbar \"\"");
-    executeCommand("bossbar set settings_bossbar color pink");
-    executeCommand("function werewolf:.settings/reload_settings");
-    executeCommand("execute if data storage sys: {game_phase:0} run bossbar set settings_bossbar players @a");
+        bossbar["settings_bossbar.color"] = "pink";
+        bossbar["settings_bossbar.visible"] = "false";
 
-    executeCommand("schedule function werewolf:shop/reset_shop 1s");
-}
+        reloadSettings();
+
+        if (dataStorage["game_phase"] == 0) {
+            bossbar["settings_bossbar.visible"] = "true";
+        }
+    }
+
+    void debugAll() {
+        for (auto& [k, v] : dataStorage)
+            std::cout << "  [Data] " << k << " = " << v << "\n";
+        for (auto& [k, v] : bossbar)
+            std::cout << "  [Bossbar] " << k << " = " << v << "\n";
+        for (auto& [k, v] : entityTags)
+            std::cout << "  [EntityTag] " << k << " = " << v << "\n";
+    }
+
+private:
+    Scoreboard scoreboard;
+    std::unordered_map<std::string, int> dataStorage;
+    std::unordered_map<std::string, std::string> bossbar;
+    std::unordered_map<std::string, int> entityTags;
+    int time = 0;
+
+    void initDayNightCycle() {
+        scoreboard.addObjective("day");
+        scoreboard.addObjective("common_timer");
+
+        scoreboard.addObjective("set_first_daytime");
+        if (dataStorage["set_first_daytime"] <= 0)
+            scoreboard.setScore("GameManager", "set_first_daytime", 1200);
+        scoreboard.addObjective("set_first_daytime_minutes");
+        scoreboard.operate("GameManager:set_first_daytime_minutes", "=", "GameManager:set_first_daytime");
+        scoreboard.operate("GameManager:set_first_daytime_minutes", "/=", "GameManager:tick_minute");
+
+        scoreboard.addObjective("set_daytime");
+        if (dataStorage["set_daytime"] <= 0)
+            scoreboard.setScore("GameManager", "set_daytime", 3600);
+        scoreboard.addObjective("set_daytime_minutes");
+        scoreboard.operate("GameManager:set_daytime_minutes", "=", "GameManager:set_daytime");
+        scoreboard.operate("GameManager:set_daytime_minutes", "/=", "GameManager:tick_minute");
+
+        scoreboard.addObjective("set_nighttime");
+        if (dataStorage["set_nighttime"] <= 0)
+            scoreboard.setScore("GameManager", "set_nighttime", 1200);
+        scoreboard.addObjective("set_nighttime_minutes");
+        scoreboard.operate("GameManager:set_nighttime_minutes", "=", "GameManager:set_nighttime");
+        scoreboard.operate("GameManager:set_nighttime_minutes", "/=", "GameManager:tick_minute");
+    }
+
+    // ダミー .ini 初期化群
+    void initRoleSystem();
+    void initSkillSystem();
+    void initItemSystem();
+    void initTaskSystem();
+    void initShopSystem();
+    void initAnimSystem();
+    void initVotingSystem();
+
+    void reloadSettings() {
+        std::cout << " 設定読み込み中... (werewolf:.settings/reload_settings)\n";
+    }
+};
 
 int main() {
-    initializeGameSettings();
-    setupBossBar();
-    setupTimeCycle();
-    setupMiscellaneous();
+    GameState game;
+    game.initGame();
+    game.initRandomEventsAndSystem();
+    game.initFinalSettings();
+    game.debugAll(); // 状態確認（任意）
 
-    std::cout << "全てのゲーム設定が完了しました。" << std::endl;
     return 0;
 }
