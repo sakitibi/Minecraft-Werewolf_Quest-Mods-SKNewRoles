@@ -67,7 +67,7 @@ public:
         scoreboard.addObjective("tick_minute");
         scoreboard.setScore("GameManager", "tick_minute", 1200);
 
-        // ボスバーの初期表示テキスト（模倣）
+        // ボスバーの初期表示テキスト
         std::cout << "ボスバー表示内容を構築\n";
 
         // 昼夜サイクル
@@ -173,7 +173,7 @@ private:
         scoreboard.operate("GameManager:set_nighttime_minutes", "/=", "GameManager:tick_minute");
     }
 
-    // ダミー .ini 初期化群
+    // .ini 初期化群
     void initRoleSystem();
     void initSkillSystem();
     void initItemSystem();
