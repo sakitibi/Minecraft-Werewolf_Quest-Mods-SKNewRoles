@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include <cooltime/setup.hpp>
-#include <cooltime/set_cooltime.hpp>
+#include "cooltime/setup.hpp"
+#include "cooltime/set_cooltime.hpp"
 
 void summonItem() {
     std::cout << "Summoning item: minecraft:carrot_on_a_stick with CustomModelData: 99999" << std::endl;
