@@ -2,7 +2,6 @@
 #include <string>
 #include <unordered_map>
 
-// Simulate the Minecraft execute and data commands
 void storeResult(const std::string& storage, const std::string& path, double value) {
     std::cout << "Storing result " << value << " in storage " << storage << " at path " << path << std::endl;
 }
@@ -20,11 +19,10 @@ void modifyEntityData(const std::string& entity, const std::string& path, const 
 }
 
 int main() {
-    // Example values, replace with actual logic to get scores and entities
-    std::string entity = "entity"; // Example value
-    double motion_x = 0.0; // Example value
-    double motion_y = 0.0; // Example value
-    double motion_z = 0.0; // Example value
+    std::string entity = "entity";
+    double motion_x = 0.0;
+    double motion_y = 0.0;
+    double motion_z = 0.0;
 
     // Motion X
     if (entity == "motion_x") {
@@ -53,7 +51,6 @@ int main() {
         }
     }
 
-    // Modify entity data
     modifyEntityData("entity", "Item.tag.Motion", "Motion");
 
     return 0;
