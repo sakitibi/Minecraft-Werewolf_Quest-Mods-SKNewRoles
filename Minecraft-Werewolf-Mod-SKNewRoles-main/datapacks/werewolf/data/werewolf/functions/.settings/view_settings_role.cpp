@@ -3,15 +3,14 @@
 #include <map>
 #include <vector>
 
-// Enum for all roles
 enum class Role {
     Jinrou,      // 人狼
     Asasine,     // アサシン
     Kyoujin,     // 狂人
     Kyoushin,    // 狂信者
     Wanashi,     // 罠師
-    Uranai,   // 占い師
-    Reinou,   // 霊能者
+    Uranai,      // 占い師
+    Reinou,      // 霊能者
     Kishi,       // 騎士
     Kyouyuu,     // 共有者
     Hoankan,     // シェリフ
@@ -79,7 +78,6 @@ public:
 int main() {
     WerewolfSettings settings;
     settings.displaySettings();
-    // Example usage:
     settings.increaseRole(Role::Jinrou);
     settings.decreaseRole(Role::Jinrou);
     settings.displaySettings();
