@@ -2,7 +2,6 @@
 #include <string>
 #include <unordered_map>
 
-// Simulate the Minecraft data commands and particle execution
 void storeResult(const std::string& entity, const std::string& storage, const std::string& path, double value) {
     std::cout << "Storing result " << value << " from " << entity << " in " << storage << " at path " << path << std::endl;
 }
@@ -21,7 +20,6 @@ void modifyEntityData(const std::string& entity, const std::string& path, const 
 }
 
 int main() {
-    // Simulate entity data
     std::unordered_map<std::string, double> motion = {
         {"x", 0.1},
         {"y", 0.0},
