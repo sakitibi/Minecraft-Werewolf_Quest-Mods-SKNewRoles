@@ -2,8 +2,9 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "setup.hpp"
+#include "set_cooltime.hpp"
 
-// Simulate the Minecraft commands
 void summonEntity(const std::string& entity, const std::string& position, const std::unordered_map<std::string, std::string>& properties) {
     std::cout << "Summoning entity " << entity << " at " << position << " with properties {";
     for (const auto& prop : properties) {
@@ -42,10 +43,9 @@ void killEntity(const std::string& entity) {
 }
 
 int main() {
-    // Example values, replace with actual logic to get entities and positions
-    std::string entity = "@s"; // Example value
-    std::string position = "^ ^-0.25 ^"; // Example value
-    std::string player = "@s"; // Example value
+    std::string entity = "@s";
+    std::string position = "^ ^-0.25 ^";
+    std::string player = "@s";
 
     // アイテムを飛ばす
     summonEntity("item", position, {
