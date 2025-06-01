@@ -1,12 +1,28 @@
 using System;
 
-class Program
+public class RemoveNightTime
 {
     static void Main()
     {
-        Console.WriteLine("scoreboard players remove #GameManager set_nighttime 1200");
-        Console.WriteLine("scoreboard players operation #GameManager set_nighttime_minutes = #GameManager set_nighttime");
-        Console.WriteLine("scoreboard players operation #GameManager set_nighttime_minutes /= #GameManager tick_minute");
-        Console.WriteLine("function werewolf:.settings/view_settings_others");
+        if(set_nighttime === null)
+        {
+            int set_nighttime = 1200;
+        }
+
+        if(set_nighttime_minutes === null)
+        {
+            int set_nighttime_minutes = 0;
+        }
+
+        set_nighttime -= 1200;
+        Console.WriteLine($"set_nighttime: {set_nighttime}");
+
+        set_nighttime_minutes = set_nighttime;
+        Console.WriteLine($"set_nighttime_minutes (before division): {set_nighttime_minutes}");
+
+        set_nighttime_minutes /= tick_minute;
+        Console.WriteLine($"set_nighttime_minutes (after division): {set_nighttime_minutes}");
+
+        Console.WriteLine("[INFO] Call function: werewolf:.settings/view_settings_others (simulated)");
     }
 }
