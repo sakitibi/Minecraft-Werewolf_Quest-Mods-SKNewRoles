@@ -1,8 +1,9 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include "setup.hpp"
+#include "set_cooltime.hpp"
 
-// Simulate the Minecraft scoreboard and function commands
 void addScore(const std::string& player, const std::string& score, int value) {
     std::cout << "Adding " << value << " to score " << score << " for player " << player << std::endl;
 }
@@ -28,7 +29,6 @@ void executeFunction(const std::string& functionName) {
 }
 
 int main() {
-    // Example values, replace with actual logic to get scores and entities
     std::unordered_map<std::string, int> scores = {{"charge_roar", 0}};
     std::string team = "Ponkotsu"; // Example value
     std::string player = "@s"; // Example value
