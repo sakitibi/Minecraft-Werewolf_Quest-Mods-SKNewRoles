@@ -55,7 +55,6 @@ int main() {
         }
     }
 
-    // Data modify
     modifyEntityData(entityName, "Item.tag.Motion", entityName, "Motion");
 
     return 0;
