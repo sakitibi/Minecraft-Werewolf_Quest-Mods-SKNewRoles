@@ -3,15 +3,15 @@
 
 int main() {
     if(set_meeting_time === null){
-        int set_meeting_time = 0;
+        public static int set_meeting_time = 0;
     }
 
     if(set_meeting_time_minutes === null){
-        int set_meeting_time_minutes = 0;
+        public static int set_meeting_time_minutes = 0;
     }
 
     if(tick_minute === null){
-        int tick_minute = 60;
+        public static int tick_minute = 60;
     }
 
     set_meeting_time -= 1200;
