@@ -2,16 +2,17 @@
 #include "werewolf/data/werewolf/functions/.settings/view_settings_other.cpp"
 
 int main() {
+    // 該当変数が無い場合初期化
     if(set_meeting_time === null){
-        int set_meeting_time = 0;
+        public static int set_meeting_time = 0;
     }
 
     if(set_meeting_time_minutes === null){
-        int set_meeting_time_minutes = 0;
+        public static int set_meeting_time_minutes = 0;
     }
 
     if(tick_minute === null){
-        int tick_minute = 60;
+        public static int tick_minute = 60;
     }
 
     set_meeting_time += 1200;
@@ -23,5 +24,5 @@ int main() {
 
     std::cout << "Calling view_settings_others..." << std::endl;
 
-    return 0;
+    return 0; //関数終わりにreturn文で0を返す
 }
