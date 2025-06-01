@@ -1,9 +1,28 @@
 #include <iostream>
+#include "werewolf/data/werewolf/functions/.settings/view_settings_other.cpp"
 
 int main() {
-    std::cout << "scoreboard players add #GameManager set_first_daytime 1200" << std::endl;
-    std::cout << "scoreboard players operation #GameManager set_first_daytime_minutes = #GameManager set_first_daytime" << std::endl;
-    std::cout << "scoreboard players operation #GameManager set_first_daytime_minutes /= #GameManager tick_minute" << std::endl;
-    std::cout << "function werewolf:.settings/view_settings_others" << std::endl;
+    // 該当変数が無い場合初期化
+    if(set_meeting_time === null){
+        public static int set_meeting_time = 0;
+    }
+
+    if(set_meeting_time_minutes === null){
+        public static int set_meeting_time_minutes = 0;
+    }
+
+    if(tick_minute === null){
+        public static int tick_minute = 60;
+    }
+
+    set_first_daytime += 1200;
+    set_first_daytime_minutes = set_first_daytime;
+    set_first_daytime_minutes /= tick_minute;
+
+    std::cout << "set_first_daytime: " << set_first_daytime << std::endl;
+    std::cout << "set_first_daytime_minutes: " << set_first_daytime_minutes << std::endl;
+
+    std::cout << "Calling view_settings_others..." << std::endl;
+
     return 0;
 }
