@@ -10,8 +10,8 @@ enum class Role {
     Kyoujin,     // 狂人
     Kyoushin,    // 狂信者
     Wanashi,     // 罠師
-    Uranaishi,   // 占い師
-    Reinousha,   // 霊能者
+    Uranai,   // 占い師
+    Reinou,   // 霊能者
     Kishi,       // 騎士
     Kyouyuu,     // 共有者
     Hoankan,     // シェリフ
@@ -30,15 +30,16 @@ struct RoleSetting {
 class WerewolfSettings {
 public:
     std::map<Role, RoleSetting> roles;
-
+    //フレームワークがエラーか起きた時用
+    //本来は詳細な説明文が出る
     WerewolfSettings() {
         roles[Role::Jinrou] = {"人狼", 1, 3, 1, "狼(人狼): 切り裂く, 咆哮, 転移の炎"};
         roles[Role::Asasine] = {"アサシン", 1, 3, 0, "狼(人狼): 切り裂く, 透明化, 転移の炎"};
         roles[Role::Kyoujin] = {"狂人", 1, 5, 0, "狼(狂人): なし"};
         roles[Role::Kyoushin] = {"狂信者", 1, 3, 0, "狼(狂人): 誰が人狼か知る"};
         roles[Role::Wanashi] = {"罠師", 1, 3, 0, "狼(狂人): 落とし穴"};
-        roles[Role::Uranaishi] = {"占い師", 1, 3, 0, "村: 占い"};
-        roles[Role::Reinousha] = {"霊能者", 1, 3, 0, "村: 霊能"};
+        roles[Role::Uranai] = {"占い師", 1, 3, 0, "村: 占い"};
+        roles[Role::Reinou] = {"霊能者", 1, 3, 0, "村: 霊能"};
         roles[Role::Kishi] = {"騎士", 1, 1, 0, "村: 守護"};
         roles[Role::Kyouyuu] = {"共有者", 2, 2, 0, "村: 共有者を知る"};
         roles[Role::Hoankan] = {"シェリフ", 1, 3, 0, "村: 正義執行"};
