@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include "setup.hpp"
+#include "set_cooltime.hpp"
 
 // Simulate the Minecraft commands
 void summonEntity(const std::string& entity, const std::string& position, const std::unordered_map<std::string, std::string>& properties) {
