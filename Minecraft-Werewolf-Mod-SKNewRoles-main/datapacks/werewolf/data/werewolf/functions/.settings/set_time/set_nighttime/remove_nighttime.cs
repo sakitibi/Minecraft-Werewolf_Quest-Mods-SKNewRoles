@@ -7,12 +7,12 @@ public class RemoveNightTime
     {
         if(set_nighttime === null)
         {
-            int set_nighttime = 1200;
+            public static int set_nighttime = 1200;
         }
 
         if(set_nighttime_minutes === null)
         {
-            int set_nighttime_minutes = 0;
+            public static int set_nighttime_minutes = 0;
         }
 
         set_nighttime -= 1200;
