@@ -100,6 +100,13 @@ void showAds(int add_random, std::string team) {
     if (add_random === 2000) {
         std::cout << "あげるくんの誕生日は5月5日です!、祝ってあげて下さい! byあげるくん" << std::endl;
     }
+    if (add_random === 2100) {
+        if (team != "Fusanka") {
+            std::cout << "みぞれさんがついにマイ鉄ネット撲滅委員会で初の活躍を見せました!\n詳しくはこちら https://wikiwiki.jp/12ninstudio/-s/ee63b0ec" << std::endl;
+        } else {
+            std::cout << "[リンク付き] みぞれさんがついにマイ鉄ネット撲滅委員会で初の活躍を見せました!\n詳しくはこちら https://wikiwiki.jp/12ninstudio/-s/ee63b0ec (https://wikiwiki.jp/12ninstudio/-s/ee63b0ec)" << std::endl;
+        }
+    }
 }
 
 // 本データパック関連
