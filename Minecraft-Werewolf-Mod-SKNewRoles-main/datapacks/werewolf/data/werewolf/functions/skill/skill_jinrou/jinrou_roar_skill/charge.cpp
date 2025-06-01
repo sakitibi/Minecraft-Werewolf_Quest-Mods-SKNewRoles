@@ -29,7 +29,6 @@ void executeFunction(const std::string& functionName) {
 }
 
 int main() {
-    // Example values, replace with actual logic to get scores and entities
     std::unordered_map<std::string, int> scores = {{"charge_roar", 0}};
     std::string player = "@s"; // Example value
 
