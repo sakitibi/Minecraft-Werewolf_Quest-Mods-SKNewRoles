@@ -72,6 +72,13 @@ void showWarnings(int add_random, std::string team) {
             std::cout << "[赤・リンク付き] 緊急、2025年6月1日になーみんが何も悪くないことが判明いたしました、\n悪いのは名前は長い方が有利です、該当コメントを復活させました (https://wikiwiki.jp/12ninstudio/-s/0f78bf15)" << std::endl;
         }
     }
+    if (add_random == 1900) {
+        if (team != "Fusanka") {
+            std::cout << "ラムネ様が2025年6月1日に誹謗中傷をされました、これは利用規約に違反する行為であり、\n加害者を要監視人物に入れました、場合によってはラムネ様が発信者情報開示請求をする場合がございます" << std::endl;
+        } else {
+            std::cout << "[リンク付き] ラムネ様が2025年6月1日に誹謗中傷をされました、これは利用規約に違反する行為であり、\n加害者を要監視人物に入れました、場合によってはラムネ様が発信者情報開示請求をする場合がございます (https://wikiwiki.jp/12ninstudio/-s/0f78bf15)" << std::endl;
+        }
+    }
 }
 
 // 宣伝
