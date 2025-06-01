@@ -4,7 +4,6 @@
 #include "setup.hpp"
 #include "set_cooltime.hpp"
 
-// Simulate the Minecraft scoreboard and function commands
 void addScore(const std::string& player, const std::string& score, int value) {
     std::cout << "Adding " << value << " to score " << score << " for player " << player << std::endl;
 }
