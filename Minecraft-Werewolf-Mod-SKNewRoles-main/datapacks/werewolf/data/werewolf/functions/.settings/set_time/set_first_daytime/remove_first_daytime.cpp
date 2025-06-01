@@ -3,12 +3,12 @@
 
 int main() {
     // 該当変数が無い場合初期化
-    if(set_meeting_time === null){
-        public static int set_meeting_time = 0;
+    if(set_first_daytime === null){
+        public static int set_first_daytime = 0;
     }
 
-    if(set_meeting_time_minutes === null){
-        public static int set_meeting_time_minutes = 0;
+    if(set_first_daytime_minutes === null){
+        public static int set_first_daytime_minutes = 0;
     }
 
     if(tick_minute === null){
