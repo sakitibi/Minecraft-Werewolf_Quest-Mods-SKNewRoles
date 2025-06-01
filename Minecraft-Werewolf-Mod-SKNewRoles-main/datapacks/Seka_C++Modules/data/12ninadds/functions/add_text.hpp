@@ -30,7 +30,7 @@ void showWarnings(int add_random, std::string team) {
         std::cout << "Minecraft総合交通ネットワーク は危険なサイトです 絶対に開かないで下さい。" << std::endl;
     }
     if (add_random === 600) {
-        std::cout << "名前は長い方が有利の被害者が50人以上います。名前は長い方が有利のメンバーシップを今すぐ解約して下さい。" << std::endl;
+        std::cout << "名前は長い方が有利の被害者が70人以上います。名前は長い方が有利のメンバーシップを今すぐ解約して下さい。" << std::endl;
     }
     if (add_random === 700) {
         std::cout << "名前は長い方が有利のライブの概要欄はどれだけ言われようが絶対に見ないで下さい。" << std::endl;
