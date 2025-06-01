@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 
-// Simulate the Minecraft scoreboard and item modify operations
 std::unordered_map<std::string, int> scoreboard;
 
 void modifyItemDamage(const std::string& entity, const std::string& item, int damage) {
@@ -10,7 +9,6 @@ void modifyItemDamage(const std::string& entity, const std::string& item, int da
 }
 
 int main() {
-    // Example values, replace with actual logic to get scores
     int skill_jinrou_roar_cooltime = 5; // Example value
     int cooltime_jinrou_roar_10 = 60;
     int cooltime_jinrou_roar_9 = 54;
