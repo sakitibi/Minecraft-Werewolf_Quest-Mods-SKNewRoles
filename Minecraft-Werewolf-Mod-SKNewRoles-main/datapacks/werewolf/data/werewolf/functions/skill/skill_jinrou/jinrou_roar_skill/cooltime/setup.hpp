@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 
-// Simulate the Minecraft scoreboard operations
 std::unordered_map<std::string, int> scoreboard;
 
 void resetScore(const std::string& player, const std::string& score) {
