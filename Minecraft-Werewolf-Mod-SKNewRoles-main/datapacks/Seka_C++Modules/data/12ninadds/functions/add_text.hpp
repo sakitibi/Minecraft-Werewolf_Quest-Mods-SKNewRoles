@@ -30,7 +30,6 @@ public:
     }
 
     void process() {
-        // Example: Simulate all triggers
         std::vector<Message> messages = {
             {0, "名前は長い方が有利を知っていますか? 名前は長い方が有利は悪質な荒らしです！\n 詳しくはこちらのリンクから https://sakitibi-com9.webnode.jp/page/25/", "!Fusanka", "", "", false},
             {0, "名前は長い方が有利を知っていますか? 名前は長い方が有利は悪質な荒らしです！\n 詳しくはこちらのリンクから", "Fusanka", "", "https://sakitibi-com9.webnode.jp/page/25/", true},
