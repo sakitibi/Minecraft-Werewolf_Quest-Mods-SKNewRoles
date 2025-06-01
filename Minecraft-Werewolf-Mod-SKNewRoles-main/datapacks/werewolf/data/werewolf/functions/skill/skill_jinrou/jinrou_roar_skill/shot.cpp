@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 
-// Simulate the Minecraft commands
 void replaceItem(const std::string& entity, const std::string& slot, const std::string& item) {
     std::cout << "Replacing item in slot " << slot << " for entity " << entity << " with " << item << std::endl;
 }
@@ -16,7 +15,6 @@ void setScore(const std::string& player, const std::string& score, int value) {
 }
 
 int main() {
-    // Example values, replace with actual logic to get scores and entities
     std::unordered_map<std::string, int> scores = {{"jinrou_roar_skill_cooltime", 0}};
     std::string player = "@s"; // Example value
 
