@@ -9,7 +9,7 @@ void modifyItemDamage(const std::string& entity, const std::string& item, int da
 }
 
 int main() {
-    int skill_jinrou_roar_cooltime = 5; // Example value
+    int skill_jinrou_roar_cooltime = 5;
     int cooltime_jinrou_roar_10 = 60;
     int cooltime_jinrou_roar_9 = 54;
     int cooltime_jinrou_roar_8 = 48;
