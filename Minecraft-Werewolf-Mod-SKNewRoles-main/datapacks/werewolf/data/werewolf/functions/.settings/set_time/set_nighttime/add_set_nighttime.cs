@@ -7,8 +7,7 @@ public class AddSetNightTime
     {
         int set_nighttime = 0;
         int set_nighttime_minutes = 0;
-        int tick_minute = 20; // Example: 20 ticks per minute (adjust as needed)
-
+        int tick_minute = 20;
         // Equivalent to: scoreboard players add GameManager set_nighttime 1200
         set_nighttime += 1200;
         Console.WriteLine($"set_nighttime: {set_nighttime}");
