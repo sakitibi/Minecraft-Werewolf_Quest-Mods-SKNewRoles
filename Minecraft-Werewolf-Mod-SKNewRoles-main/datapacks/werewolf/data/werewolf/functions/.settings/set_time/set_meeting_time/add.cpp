@@ -21,7 +21,6 @@ int main() {
     std::cout << "set_meeting_time: " << set_meeting_time << std::endl;
     std::cout << "set_meeting_time_minutes: " << set_meeting_time_minutes << std::endl;
 
-    // Simulate calling another function
     std::cout << "Calling view_settings_others..." << std::endl;
 
     return 0;
