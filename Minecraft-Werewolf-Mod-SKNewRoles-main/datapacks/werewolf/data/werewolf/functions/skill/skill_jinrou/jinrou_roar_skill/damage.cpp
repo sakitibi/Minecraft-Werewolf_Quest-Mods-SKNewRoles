@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 
-// Simulate the Minecraft commands
 void summonEntity(const std::string& entity, const std::string& position, const std::vector<std::string>& tags) {
     std::cout << "Summoning entity " << entity << " at " << position << " with tags ";
     for (const auto& tag : tags) {
@@ -28,10 +27,9 @@ void removeTag(const std::string& entity, const std::string& tag) {
 }
 
 int main() {
-    // Example values, replace with actual logic to get entities and positions
-    std::string entity = "@s"; // Example value
-    std::string position = "~ ~ ~"; // Example value
-    std::string target = "@a[team=Cupid]"; // Example value
+    std::string entity = "@s";
+    std::string position = "~ ~ ~";
+    std::string target = "@a[team=Cupid]";
 
     // ヒットタグを削除
     removeTag(entity, "hit_roar");
