@@ -1,83 +1,39 @@
 #include <iostream>
 #include <string>
-#include <map>
-#include <vector>
 
-enum class ModRole {
-    Witch,          // 魔女
-    Rimokon,        // リモコン
-    DoubleKiller,   // ダブルキラー
-    Evilguesser,    // イビルゲッサー
-    Sniper,         // スナイパー
-    Niceteleporter, // ナイステレポーター
-    Niceguesser,    // ナイスゲッサー
-    Syachou,        // 社長
-    Satsumatoimo,   // さつまといも
-    Jackal          // ジャッカル
-};
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define WHITE   "\033[37m"
+#define DARK_RED "\033[1;31m"
+#define RESET   "\033[0m"
 
-struct ModRoleSetting {
-    std::string name;
-    int minCount;
-    int maxCount;
-    int count;
-    std::string description;
-};
-
-class ModWerewolfSettings {
-public:
-    std::map<ModRole, ModRoleSetting> roles;
-
-    //フレームワークがエラー起きた時用
-    //本来は詳細な説明文が出る
-    ModWerewolfSettings() {
-        roles[ModRole::Witch] = {"魔女", 1, 3, 1, "狼(魔女): キル, ビーム, 転移の炎"};
-        roles[ModRole::Rimokon] = {"リモコン", 1, 3, 0, "狼(リモコン): キル, マーキング, 操作, 転移の炎"};
-        roles[ModRole::DoubleKiller] = {"ダブルキラー", 1, 3, 0, "狼(ダブルキラー): キル(2ボタン), 転移の炎"};
-        roles[ModRole::Evilguesser] = {"イビルゲッサー", 1, 3, 0, "狼(イビルゲッサー): キル, 推測射撃, 転移の炎"};
-        roles[ModRole::Sniper] = {"スナイパー", 1, 3, 0, "狼(スナイパー): 射撃, 転移の炎"};
-        roles[ModRole::Niceteleporter] = {"ナイステレポーター", 1, 3, 0, "村: テレポート"};
-        roles[ModRole::Niceguesser] = {"ナイスゲッサー", 1, 3, 0, "村: 推測射撃"};
-        roles[ModRole::Syachou] = {"社長", 1, 3, 0, "村: エメラルド配布"};
-        roles[ModRole::Satsumatoimo] = {"さつまといも", 1, 3, 0, "村or狼: 夜が明けると陣営が変わる"};
-        roles[ModRole::Jackal] = {"ジャッカル", 1, 3, 0, "第三陣営(ジャッカル): 切り裂く, サイドキック, 転移の炎"};
+void printRole(const std::string& name, const std::string& color, int count, int min, int max, const std::string& info, const std::string& addCmd, const std::string& removeCmd) {
+    std::cout << color << "  " << name << "  " << RESET;
+    if (count <= min) {
+        std::cout << DARK_RED << " <" << RESET << "  " << WHITE << count << "  >" << RESET;
+        std::cout << " (これ以上人数は減らせません)";
+    } else if (count >= max) {
+        std::cout << WHITE << " <  " << count << "  " << DARK_RED << ">" << RESET;
+        std::cout << " (これ以上人数は増やせません)";
+    } else {
+        std::cout << WHITE << " <  " << count << "  >" << RESET;
     }
-
-    void displaySettings() {
-        std::cout << "\n[Settings]\n";
-        std::cout << " [役職人数]\n";
-        for (const auto& [role, setting] : roles) {
-            std::cout << "  " << setting.name << " (" << setting.count << ") : " << setting.description << std::endl;
-        }
-    }
-
-    void increaseRole(ModRole role) {
-        auto& setting = roles[role];
-        if (setting.count < setting.maxCount) {
-            setting.count++;
-            std::cout << setting.name << " increased to " << setting.count << std::endl;
-        } else {
-            std::cout << setting.name << " はこれ以上増やせません" << std::endl;
-        }
-    }
-
-    void decreaseRole(ModRole role) {
-        auto& setting = roles[role];
-        if (setting.count > setting.minCount) {
-            setting.count--;
-            std::cout << setting.name << " decreased to " << setting.count << std::endl;
-        } else {
-            std::cout << setting.name << " はこれ以上減らせません" << std::endl;
-        }
-    }
-};
+    std::cout << "\n  " << info << std::endl;
+    std::cout << "  [人数を増やす: " << addCmd << "] [人数を減らす: " << removeCmd << "]\n";
+}
 
 int main() {
-    ModWerewolfSettings settings;
-    settings.displaySettings();
-    // Example usage:
-    settings.increaseRole(ModRole::Witch);
-    settings.decreaseRole(ModRole::Witch);
-    settings.displaySettings();
+    std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n[Settings]\n";
+    // 役説明を表示
+    printRole("魔女", RED, 1, 0, 3, "陣営: 狼(Witch)\nスキル: キル, ビーム(夜限定)\n特殊能力: 誰が人狼か知る, 転移の炎", "/function werewolf:.settings/role/count/witch/add", "/function werewolf:.settings/role/count/witch/remove");
+    printRole("ﾘﾓｺﾝ", RED, 0, 0, 3, "陣営: 狼(リモコン)\nスキル: キル, マーキング, 操作\n特殊能力: 誰が人狼か知る, 転移の炎", "/function werewolf:.settings/role/count/rimokon/add", "/function werewolf:.settings/role/count/rimokon/remove");
+    printRole("ﾀﾞﾌﾞﾙｷﾗｰ", RED, 2, 0, 3, "陣営: 狼(ダブルキラー)\nスキル: キル(2つ)\n特殊能力: 誰が人狼か知る, 転移の炎", "/function werewolf:.settings/role/count/doublekiller/add", "/function werewolf:.settings/role/count/doublekiller/remove");
+    printRole("ｲﾋﾞﾙｹﾞｯｻｰ", RED, 1, 0, 3, "陣営: 狼(イビルゲッサー)\nスキル: キル\n特殊能力: 推測射撃, 誰が人狼か知る, 転移の炎", "/function werewolf:.settings/role/count/evilguesser/add", "/function werewolf:.settings/role/count/evilguesser/remove");
+    printRole("ｽﾅｲﾊﾟｰ", RED, 3, 0, 3, "陣営: 狼(スナイパー)\nスキル: 射撃\n特殊能力: 誰が人狼か知る, 転移の炎", "/function werewolf:.settings/role/count/sniper/add", "/function werewolf:.settings/role/count/sniper/remove");
+    printRole("ﾅｲｽﾃﾚﾎﾟｰﾀｰ", GREEN, 1, 0, 3, "陣営: 村\nスキル: テレポート", "/function werewolf:.settings/role/count/niceteleporter/add", "/function werewolf:.settings/role/count/niceteleporter/remove");
+    printRole("ﾅｲｽｹﾞｯｻｰ", GREEN, 2, 0, 3, "陣営: 村\n特殊能力: 推測射撃", "/function werewolf:.settings/role/count/niceguesser/add", "/function werewolf:.settings/role/count/niceguesser/remove");
+    printRole("社長", GREEN, 1, 0, 3, "陣営: 村\nスキル: なし\n特殊能力: 生存で全員にエメラルド", "/function werewolf:.settings/role/count/syachou/add_syachou", "/function werewolf:.settings/role/count/syachou/remove_syachou");
+    printRole("さつまといも", GREEN, 3, 0, 3, "陣営: 村or狼\nスキル: なし\n特殊能力: 夜が明けると陣営が変わる", "/function werewolf:.settings/role/count/satsumatoimo/add_satsumatoimo", "/function werewolf:.settings/role/count/satsumatoimo/remove_satsumatoimo");
+    printRole("ジャッカル", RED, 1, 0, 3, "陣営: 第三陣営(ジャッカル)\nスキル: 切り裂く, サイドキック\n特殊能力: 誰がジャッカルか知る, 転移の炎", "-", "-");
     return 0;
 }
