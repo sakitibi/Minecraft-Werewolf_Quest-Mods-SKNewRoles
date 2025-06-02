@@ -2,7 +2,7 @@
 #include <string>
 
 int main() {
-    for (int tag = 1; tag <= 13; ++tag) {
+    for (tag = 1; tag <= 13; ++tag) {
         std::cout << "[Player with tag=" << tag << "] "
                   << "\uF80A\uF808\uF806 "
                   << "を切り裂く (右クリック) "
