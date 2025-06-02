@@ -1,5 +1,5 @@
 using System;
-using werewolf.data.werewolf.functions..settings
+using werewolf.data.werewolf.functions..settings;
 
 public class RemoveNightTime
 {

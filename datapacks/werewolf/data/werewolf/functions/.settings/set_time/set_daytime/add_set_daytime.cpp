@@ -3,15 +3,15 @@
 
 int main() {
     if(set_daytime === null){
-        public static int set_daytime = 0;
+        static int set_daytime = 0;
     }
 
     if(set_daytime_minutes === null){
-        public static int set_daytime_minutes = 0;
+        static int set_daytime_minutes = 0;
     }
 
     if(tick_minute === null){
-        public static int tick_minute = 60;
+        static int tick_minute = 60;
     }
     
     set_daytime += 1200;

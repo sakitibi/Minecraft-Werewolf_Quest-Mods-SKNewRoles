@@ -1,5 +1,5 @@
 using System;
-using werewolf.data.werewolf.functions..settings
+using werewolf.data.werewolf.functions..settings;
 
 public class AddSetNightTime
 {
@@ -17,7 +17,7 @@ public class AddSetNightTime
 
         if(tick_minute === null)
         {
-             public static int tick_minute = 20; 
+            public static int tick_minute = 20; 
         }
         set_nighttime += 1200;
         Console.WriteLine($"set_nighttime: {set_nighttime}");
