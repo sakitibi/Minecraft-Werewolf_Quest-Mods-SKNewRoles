@@ -1,109 +1,62 @@
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include <GLFW/glfw3.h>
-#include <string>
-#include <unordered_map>
-#include <functional>
 #include <iostream>
 
-// プレイヤークラス
-class Player {
-public:
-    std::string role;
-    void changeRole(const std::string& newRole) {
-        role = newRole;
-        std::cout << "[INFO] 役職が " << newRole << " に変更されました。\n";
-    }
-};
+// ANSIカラーコードの例（Linux/macOSターミナルやWindowsの一部端末対応）
+const std::string RED = "\033[31m";
+const std::string GREEN = "\033[32m";
+const std::string AQUA = "\033[36m";
+const std::string WHITE = "\033[37m";
+const std::string RESET = "\033[0m";
 
-void renderDebugMenu(Player& player) {
-    ImGui::Begin("[Debug_Settings]");
+void printRoleSetting() {
+    std::cout << "\n\n\n\n\n\n\n\n\n\n\n[Debug_Settings]\n";
 
-    ImGui::Text("役職変更");
+    std::cout << " [役職変更]\n";
 
-    const std::pair<const char*, ImVec4> roles[] = {
-        {"人狼",          ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"Witch",         ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"リモコン",      ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"ダブルキラー",  ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"狂人",          ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"狂信者",        ImVec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {"村人",          ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"占い師",        ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"霊能者",        ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"騎士",          ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"共有者",        ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"シェリフ",      ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"パン屋",        ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"ナイステレポーター", ImVec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {"妖狐",          ImVec4(0.0f, 1.0f, 1.0f, 1.0f)},
-        {"背徳者",        ImVec4(0.0f, 1.0f, 1.0f, 1.0f)},
-        {"死神",          ImVec4(0.0f, 1.0f, 1.0f, 1.0f)},
-        {"キューピット",  ImVec4(0.0f, 1.0f, 1.0f, 1.0f)},
-    };
+    std::cout << "  人狼          " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  Witch         " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  リモコン       " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  ダブルキラー    " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  イビルゲッサー  " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  スナイパー  " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  狂人          " << RED << "<変更>" << RESET << "\n";
+    std::cout << "  狂信者        " << RED << "<変更>" << RESET << "\n";
 
-    for (const auto& [name, color] : roles) {
-        ImGui::Text("  %s", name);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, color);
-        if (ImGui::Button(("変更##" + std::string(name)).c_str())) {
-            player.changeRole(name);
-        }
-        ImGui::PopStyleColor();
-    }
+    std::cout << "  村人          " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  占い師        " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  霊能者        " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  騎士          " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  共有者        " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  シェリフ        " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  パン屋        " << GREEN << "<変更>" << RESET << "\n";
 
-    ImGui::Separator();
-    ImGui::Text("その他");
+    std::cout << "  ポンコツ      ";
+    std::cout << GREEN << "<人狼> " << RESET;
+    std::cout << GREEN << "<罠師> " << RESET;
+    std::cout << GREEN << "<占い師> " << RESET;
+    std::cout << GREEN << "<霊能者> " << RESET;
+    std::cout << GREEN << "<騎士> " << RESET;
+    std::cout << GREEN << "<シェリフ> " << RESET << "\n";
 
-    if (ImGui::Button("ゲームを強制終了")) {
-        std::cout << "[INFO] ゲームがリセットされました。\n";
-    }
+    std::cout << "  ナイステレポーター         " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  社長         " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  さつまといも         " << GREEN << "<変更>" << RESET << "\n";
+    std::cout << "  シーア         " << GREEN << "<変更>" << RESET << "\n";
 
-    if (ImGui::Button("コマンドログを表示")) {
-        std::cout << "[DEBUG] コマンドログON\n";
-    }
+    std::cout << "  妖狐          " << AQUA << "<変更>" << RESET << "\n";
+    std::cout << "  背徳者        " << AQUA << "<変更>" << RESET << "\n";
+    std::cout << "  ジャッカル          " << AQUA << "<変更>" << RESET << "\n";
+    std::cout << "  サイドキック        " << AQUA << "<変更>" << RESET << "\n";
+    std::cout << "  死神          " << AQUA << "<変更>" << RESET << "\n";
+    std::cout << "  キューピット  " << AQUA << "<変更>" << RESET << "\n";
 
-    if (ImGui::Button("コマンドログを非表示")) {
-        std::cout << "[DEBUG] コマンドログOFF\n";
-    }
+    std::cout << " [その他]\n";
 
-    ImGui::End();
+    std::cout << "  ゲームを強制終了          " << GREEN << "<実行>" << RESET << "\n";
+    std::cout << "  コマンドログを表示        " << GREEN << "<実行>" << RESET << "\n";
+    std::cout << "  コマンドログを非表示      " << GREEN << "<実行>" << RESET << "\n";
 }
 
 int main() {
-    if (!glfwInit()) return 1;
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Werewolf Role Debug", nullptr, nullptr);
-    glfwMakeContextCurrent(window);
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 130");
-
-    Player player;
-
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        renderDebugMenu(player);
-
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        glfwSwapBuffers(window);
-    }
-
-    // クリーンアップ
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    printRoleSetting();
     return 0;
 }

@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 
-// 元のソースコード
 class Player {
 public:
     std::unordered_map<std::string, std::string> inventory;

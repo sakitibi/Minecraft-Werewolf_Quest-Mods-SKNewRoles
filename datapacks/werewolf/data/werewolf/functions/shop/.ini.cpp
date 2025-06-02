@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 
-//元々のソースコード
 class Shop {
 public:
     void setDefaultPrices() {
