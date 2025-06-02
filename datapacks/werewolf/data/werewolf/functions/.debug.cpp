@@ -1,4 +1,6 @@
 #include <iostream>
+#include ".system/view_settings_role.cpp"
+#include ".system/view_settings_role_mod.cpp"
 
 // ANSIカラーコードの例（Linux/macOSターミナルやWindowsの一部端末対応）
 const std::string RED = "\033[31m";
