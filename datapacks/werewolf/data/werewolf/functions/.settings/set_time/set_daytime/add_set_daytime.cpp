@@ -2,15 +2,15 @@
 #include "werewolf/data/werewolf/functions/.settings/view_settings_other.cpp"
 
 int main() {
-    if(set_daytime === null){
+    if(!set_daytime.set_value()){
         static int set_daytime = 0;
     }
 
-    if(set_daytime_minutes === null){
+    if(!set_daytime_minutes.set_value()){
         static int set_daytime_minutes = 0;
     }
 
-    if(tick_minute === null){
+    if(!tick_minute.set_value()){
         static int tick_minute = 60;
     }
     

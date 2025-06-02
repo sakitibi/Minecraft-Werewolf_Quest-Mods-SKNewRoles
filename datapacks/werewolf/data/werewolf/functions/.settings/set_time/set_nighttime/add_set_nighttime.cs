@@ -5,17 +5,17 @@ public class AddSetNightTime
 {
     static void Main()
     {
-        if(set_nighttime === null)
+        if(set_nighttime == null)
         {
             public static int set_nighttime = 1200;
         }
 
-        if(set_nighttime_minutes === null)
+        if(set_nighttime_minutes == null)
         {
             public static int set_nighttime_minutes = 0;
         }
 
-        if(tick_minute === null)
+        if(tick_minute == null)
         {
             public static int tick_minute = 20; 
         }

@@ -3,15 +3,15 @@
 
 int main() {
     // 該当変数が無い場合初期化
-    if(set_meeting_time === null){
+    if(!set_meeting_time.has_value()){
         static int set_meeting_time = 0;
     }
 
-    if(set_meeting_time_minutes === null){
+    if(!set_meeting_time_minutes.has_value()){
         static int set_meeting_time_minutes = 0;
     }
 
-    if(tick_minute === null){
+    if(!tick_minute.has_value()){
         static int tick_minute = 60;
     }
 
