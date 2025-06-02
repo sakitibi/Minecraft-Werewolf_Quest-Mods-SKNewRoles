@@ -1,5 +1,5 @@
 #include <iostream>
-#include "werewolf/data/werewolf/functions/.settings/view_settings_other.cpp"
+#include "werewolf/data/werewolf/functions/.settings/view_settings_other.hpp"
 
 int main() {
     // 該当変数が無い場合初期化
