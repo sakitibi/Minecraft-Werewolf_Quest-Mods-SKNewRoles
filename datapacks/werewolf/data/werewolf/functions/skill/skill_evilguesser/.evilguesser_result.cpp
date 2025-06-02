@@ -7,7 +7,7 @@ int main() {
         return 0;
     }
 
-    for (int tag = 1; tag <= 13; ++tag) {
+    for (tag = 1; tag <= 13; ++tag) {
         std::cout << "[Skill] Executing evilguesser_skill/particular/evilguesser_" << tag << std::endl;
     }
 
