@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-
 void applyDamage(const std::string& target, double amount, const std::string& damageType, const std::string& source) {
     std::cout << "Applying " << amount << " damage of type " << damageType << " to " << target << " by " << source << std::endl;
 }
@@ -11,9 +10,8 @@ void executeFunction(const std::string& functionName) {
 }
 
 int main() {
-    
     std::string entity = "@s"; 
-    std::string target = "@a[tag=2,limit=1]"; 
+    std::string target = "@a[tag=13,limit=1]"; 
     std::string team = "Jinrou"; 
 
     // Jinrou

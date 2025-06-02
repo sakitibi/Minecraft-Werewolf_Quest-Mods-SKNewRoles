@@ -11,7 +11,7 @@ void executeFunction(const std::string& functionName) {
 }
 
 int main() {
-    s, replace with actual logic to get entities and teams
+    
     std::string entity = "@s"; 
     std::string target = "@a[tag=10,limit=1]"; 
     std::string team = "Jinrou"; 
