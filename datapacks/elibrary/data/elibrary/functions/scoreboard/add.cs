@@ -1,3 +1,5 @@
+using System;
+
 public class ScoreboardSetup
 {
     public void AddObjectives()
