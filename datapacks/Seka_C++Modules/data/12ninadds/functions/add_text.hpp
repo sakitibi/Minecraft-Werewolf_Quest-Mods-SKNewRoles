@@ -2,7 +2,7 @@
 #include <string>
 
 // 注意喚起
-void showWarnings(int add_random, std::string team) {
+void showWarnings(add_random, std::string team) {
     if (add_random == 0) {
         if (team != "Fusanka") {
             std::cout << "名前は長い方が有利を知っていますか? 名前は長い方が有利は悪質な荒らしです！\n 詳しくはこちらのリンクから https://sakitibi-com9.webnode.jp/page/25/" << std::endl;
@@ -82,7 +82,7 @@ void showWarnings(int add_random, std::string team) {
 }
 
 // 宣伝
-void showAds(int add_random, std::string team) {
+void showAds(add_random, std::string team) {
     if (add_random == 900) {
         if (team != "Fusanka") {
             std::cout << "TrainBuildersは面白いRPGゲームです、TrainBuildersを今すぐダウンロード!(スポンサー:TrainBuilder)" << std::endl;
@@ -107,10 +107,17 @@ void showAds(int add_random, std::string team) {
             std::cout << "[リンク付き] みぞれさんがついにマイ鉄ネット撲滅委員会で初の活躍を見せました!\n詳しくはこちら https://wikiwiki.jp/12ninstudio/-s/ee63b0ec (https://wikiwiki.jp/12ninstudio/-s/ee63b0ec)" << std::endl;
         }
     }
+    if (add_random == 2200) {
+        if (team != "Fusanka") {
+            std::cout << "2025年6月7日に一回名前は長い方が有利の配信が切れました!\nこれは名前は長い方が有利に罰が当たったんでしょうか\n詳しくはこちら https://youtu.be/WIMW3U7MiHc" << std::endl;
+        } else {
+            std::cout << "[リンク付き] 2025年6月7日に一回名前は長い方が有利の配信が切れました!\nこれは名前は長い方が有利に罰が当たったんでしょうか\n詳しくはこちら https://youtu.be/WIMW3U7MiHc (https://youtu.be/WIMW3U7MiHc)" << std::endl;
+        }
+    }
 }
 
 // 本データパック関連
-void showPackInfo(int add_random, std::string team, std::string tags, int satsumatoimo_role, bool witch_weakness) {
+void showPackInfo(add_random, std::string team, std::string tags, satsumatoimo_role, witch_weakness) {
     if (add_random == 1400) {
         std::cout << "SKNewRolesは超大手ゲーム実況者12ninTV(さきちび)によって開発されたゲームです、ぜひシェアしてみて下さい!" << std::endl;
     }
