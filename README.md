@@ -1,4 +1,4 @@
-## こちらはマイクラ人狼クエストSKNewRolesv2.6.0.0です。
+## こちらはマイクラ人狼クエストSKNewRolesv2.9.9.9です。
 <br>
 <h3>
   <a href="https://sakitibi.github.io/12nin.com/SKNewRoles">ダウンロードリンク</a>
